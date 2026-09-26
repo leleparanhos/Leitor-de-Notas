@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(10, 8, 15);
+    color: aliceblue;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+h1 {
+    text-align: center;
+    color: rgb(240, 248, 255);
+    font-size: 40px;
+}
+
+.topo {
+    color: #aec3e6;
+    text-align: center;
+    margin: 10px;
+    font-size: 15px;
+}
+
+.caixatotal {
+    background-color: #0f766e;
+    color: #ffffff;
+    text-align: center;
+    padding: 25px;
+    border-radius: 18px;
+    font-size: 15px;
+}
+
+.totalgasto {
+    text-align: center;
+    color: aliceblue;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+label {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+    font-weight: bold;
+    border: 2px dashed #ffffff;
+    display: block;
+    margin: 15px;
+    cursor: pointer;
+}
+
+input {
+    display: none;
+}
+
+.comprovante {
+    background-color: #0d1716;
+    border: 1px solid #182b29;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.itens {
+    white-space: pre-line;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #a0aec0;
+}
+
+.totalnota {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px dashed #2d3748;
+    padding-top: 12px;
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #e2e8f0;}
