@@ -26,8 +26,13 @@
 
     <div>
         <label>
-            Toque para fotografar o comprovante
-            <input type="file" class="foto" accept="image/*" capture="environment" onchange="lerFoto()">
+            📸 Tirar Foto na Hora
+            <input type="file" accept="image/*" capture="environment" onchange="lerFoto(this)">
+        </label>
+
+        <label>
+            📁 Abrir Galeria ou Arquivos
+            <input type="file" accept="image/*" onchange="lerFoto(this)">
         </label>
     </div>
 
