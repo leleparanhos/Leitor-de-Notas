@@ -1,4 +1,3 @@
-
 let pedido = 'Leia o cupom fiscal. Seja LITERAL: copie as letras exatamente como estão na imagem, não invente palavras. Responda em UMA linha separando por |. PARTE 1: Emoji da categoria, <strong>NOME DA LOJA</strong> e a lista de itens. CATEGORIAS: 🛒 Mercado, 🚗 Transporte, 🍔 Comida, 💊 Saúde, 🎉 Lazer, 🏠 Casa, 💸 Outros. REGRAS PARA ITENS: 1) Ignore códigos no início da linha (ex: de "38 CERVEJA" escreva só "CERVEJA"). 2) Ignore linhas de cálculo como "1,000 x R$". 3) Formate os preços sempre com duas casas decimais (ex: mude 6,000 para 6,00). Formato: Item — R$ Valor<br>. PARTE 2: Apenas o NÚMERO do valor total pago, com ponto. Se não encontrar valor total do comprovante, retorne R$ 0,00 para não quebrar o cálculo final. Exemplo: 🍔 <strong>EMPRESA TESTE</strong><br>CERVEJA LONGNECK UN — R$ 6,00<br>GATORADE UN — R$ 4,50<br>MONSTER UN — R$ 8,00<br>REDBULL UN — R$ 10,00<br>SUNDAE UN — R$ 6,50<br>CACHORRO 1 SALSICHA UN — R$ 8,00|43.00';
 let total = 0;
 
@@ -14,10 +13,28 @@ function atualizarContadorComprovantes(quantidade) {
 
 async function lerFoto(inputClicado) {
     let foto = inputClicado.files[0];
+
+    // Trava de segurança UX: Se a pessoa abrir a galeria no celular e cancelar sem escolher nada, a função para aqui sem quebrar o site
+    if (!foto) {
+        return;
+    }
+
+    // UX DESIGN: Adiciona uma mensagem de "Carregando" no topo da lista enquanto a foto sobe
+    document.querySelector(".lista").insertAdjacentHTML(
+        'afterbegin',
+        '<p id="carregando" style="text-align:center; color:#0f766e; font-weight:bold; margin-bottom: 15px;">⏳ A IA está lendo a foto, aguarde alguns segundos...</p>'
+    );
+
     let resposta = await puter.ai.chat(pedido, foto);
     let texto = resposta.message.content;
     let partes = texto.split("|");
     console.log(texto);
+
+    // Remove a mensagem de "Carregando" assim que a IA devolve a resposta
+    let avisoCarregando = document.getElementById("carregando");
+    if (avisoCarregando) {
+        avisoCarregando.remove();
+    }
 
     const novoComprovante = `
     <div class="comprovante">
@@ -25,9 +42,8 @@ async function lerFoto(inputClicado) {
         <div class="totalnota">TOTAL DA NOTA: R$ ${partes[1]}</div>
     </div>
     `;
-    
-    document.querySelector(".lista").insertAdjacentHTML('afterbegin', novoComprovante);
 
+    document.querySelector(".lista").insertAdjacentHTML('afterbegin', novoComprovante);
 
     let valorLido = Number(partes[1]);
 
