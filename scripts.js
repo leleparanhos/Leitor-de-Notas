@@ -12,8 +12,8 @@ function atualizarContadorComprovantes(quantidade) {
     }
 }
 
-async function lerFoto() {
-    let foto = document.querySelector(".foto").files[0];
+async function lerFoto(inputClicado) {
+    let foto = inputClicado.files[0];
     let resposta = await puter.ai.chat(pedido, foto);
     let texto = resposta.message.content;
     let partes = texto.split("|");
